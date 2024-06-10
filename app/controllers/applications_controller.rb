@@ -16,10 +16,12 @@ class ApplicationsController < ApplicationController
     end
 
     def update
-        application = Application.find_by(token: params[:token])
-        application.update(application_params)
-        render json: application
-    end
+        if @application.update(application_params)
+          render json: @application
+        else
+          render json: @application.errors, status: :unprocessable_entity
+        end
+      end
 
     def show
         application = Application.find_by(token: params[:token])

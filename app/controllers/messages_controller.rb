@@ -8,16 +8,17 @@ class MessagesController < ApplicationController
      render json: MessageResource.new(@messages).as_json
   end
 
-  def create
-    @message = @chat.messages.new(message_params)
-    @message.number = @chat.messages.count + 1
-    #TODO: Use CreateMessageWorker a worker to create the message
-    if @message.save
-      render json: MessageResource.new(@message).as_json, status: :created
-    else
-      render json: @message.errors, status: :unprocessable_entity
+   def create
+      @message = @chat.messages.new(message_params)
+      @message.number = @chat.messages.count + 1
+
+      # TODO: Use CreateMessageWorker a worker to create the message
+      if @message.save
+        render json: MessageResource.new(@message).as_json, status: :created
+      else
+        render json: @message.errors, status: :unprocessable_entity
+      end
     end
-  end
 
   def update
     @message = @chat.messages.find_by(number: params[:id])
