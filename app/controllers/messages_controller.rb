@@ -11,7 +11,7 @@ class MessagesController < ApplicationController
   def create
     @message = @chat.messages.new(message_params)
     @message.number = @chat.messages.count + 1
-    Rails.logger.debug { @message.inspect }
+    #TODO: Use CreateMessageWorker a worker to create the message
     if @message.save
       render json: MessageResource.new(@message).as_json, status: :created
     else

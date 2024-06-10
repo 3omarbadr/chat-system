@@ -10,6 +10,8 @@ class ChatsController < ApplicationController
   def create
     @chat = @application.chats.new
     @chat.number = @application.chats.count + 1
+
+    #TODO: Use CreateChatWorker a worker to create the chat
     if @chat.save
       render json: ChatResource.new(@chat).as_json, status: :created
     else

@@ -43,6 +43,7 @@ gem 'elasticsearch-rails'
 gem 'sidekiq'
 gem 'redis'
 gem 'rspec-rails', group: [:development, :test]
+gem 'whenever', require: false
 
 
 
