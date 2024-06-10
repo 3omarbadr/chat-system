@@ -1,6 +1,6 @@
 require_relative "boot"
 
-require "rails"
+require "rails/all"
 # Pick the frameworks you want:
 require "active_model/railtie"
 require "active_job/railtie"
@@ -36,5 +36,11 @@ module ChatSystem
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.api = "app_chat_number"
+    config.super_debugger = true
+#     config.x.redis_message_count_prefix = "chat_message_count"
+#     config.x.chat_group_size = 5
+#     config.x.message_group_size = 5
   end
 end
