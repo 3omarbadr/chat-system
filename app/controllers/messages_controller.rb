@@ -28,6 +28,11 @@ class MessagesController < ApplicationController
     end
   end
 
+   def search
+       @messages = Message.search(params[:q]).where(chat: @chat)
+       render json: @messages.map { |message| MessageResource.new(message).as_json }
+     end
+
   private
 
     def set_application

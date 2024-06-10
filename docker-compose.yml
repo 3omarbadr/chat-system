@@ -55,8 +55,8 @@ services:
       - 9200
     environment:
       - ES_JAVA_OPTS=-Xms2g -Xmx2g
-      - bootstrap.memory_lock=true
       - discovery.type=single-node
+      - network.host=0.0.0.0
 
   sidekiq:
     build: .
@@ -72,5 +72,8 @@ services:
       DB_PASSWORD: password
       DB_HOST: db
       DB_PORT: 3306
+      ELASTICSEARCH_URL: http://elasticsearch:9200
     depends_on:
       - redis
+      - db
+      - elasticsearch
